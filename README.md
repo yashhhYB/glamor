@@ -72,18 +72,43 @@ features
 - server side / static rendering
 - tests / coverage
 - experimental - [write real css](https://github.com/threepointone/glamor/blob/master/docs/css.md), with syntax highlighting and linting
+-  extras:
+### Grid Utilities
 
+The `grid.js` module provides helper functions for generating CSS Grid layouts using Glamor. 
 
-(thanks to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to run our build in real browsers.)
+#### Example
 
-docs
----
-- [api documentation](https://github.com/threepointone/glamor/blob/master/docs/api.md)
-- [howto](https://github.com/threepointone/glamor/blob/master/docs/howto.md) - a comparison of css techniques in glamor
-- [plugins](https://github.com/threepointone/glamor/blob/master/docs/plugins.md)
-- [server side rendering](https://github.com/threepointone/glamor/blob/master/docs/server.md)
-- [performance tips](https://github.com/threepointone/glamor/blob/master/docs/performance.md)
-- [what happens when I call css(...rules)?](https://github.com/threepointone/glamor/blob/master/docs/implementation.md)
+```javascript
+import { gridContainer, gridItem } from 'glamor/grid';
+
+const containerStyles = gridContainer({
+  columns: 'repeat(3, 1fr)',
+  rows: 'auto',
+  gap: '10px',
+});
+
+const itemStyles = gridItem({
+  columnStart: 1,
+  columnEnd: 3,
+});
+
+// Apply to components
+<div {...containerStyles}>
+  <div {...itemStyles}>Grid Item</div>
+</div>
+Functions
+gridContainer(options): Creates grid container styles.
+
+columns (default: 1fr): Grid column definitions.
+rows (default: auto): Grid row definitions.
+gap (default: 0): Space between grid items.
+justifyItems (default: stretch): Alignment of grid items horizontally.
+alignItems (default: stretch): Alignment of grid items vertically.
+gridItem(options): Creates styles for individual grid items.
+
+columnStart, columnEnd: Define the grid item's column span.
+rowStart, rowEnd: Define the grid item's row span.
 
 extras
 ---
